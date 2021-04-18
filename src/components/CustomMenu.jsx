@@ -15,14 +15,13 @@ const CustomMenu = ({ text, listItemRef, open }) => {
   useEffect(() => {
     open && setIsOpen(true);
   }, [open]);
-
+  const CloseContextMenu = (e) => {
+    let listItem = listItemRef.current;
+    listItem && listItem.contains(e.target)
+      ? e.preventDefault()
+      : setIsOpen(false);
+  };
   useEffect(() => {
-    const CloseContextMenu = (e) => {
-      let listItem = listItemRef.current;
-      listItem && listItem.contains(e.target)
-        ? e.preventDefault()
-        : setIsOpen(false);
-    };
     document.addEventListener("click", CloseContextMenu);
 
     return () => {
